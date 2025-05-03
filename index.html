@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Light Novel</title>
+
+    <link rel="stylesheet" href="style.css">
+ 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+<body>
+    <main>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Light Novel</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                  <a class="nav-link active" aria-current="page" href="#">Home</a>
+                  <a class="nav-link" href="#">About</a>
+                </div>
+              </div>
+            </div>
+          </nav>
+    </main>
+
+    <div class="row" style="background-color: aqua;">
+        <div class="px-5 pt-1 my-2 border-bottom">
+          <h1 class="display-4 fw-bold text-start">Inui Sachi</h1>
+      
+          <div class="col-lg-6">
+            <p class="lead mb-4 text-start">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis doloremque explicabo hic aut sapiente mollitia dolorem. Veritatis reiciendis amet, inventore in accusantium neque ratione aut praesentium? Aliquam optio saepe reprehenderit?
+            </p>
+          </div>
+      
+          <div class="col">
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+              <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#storyModal">Story</button>
+              <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#assetModal">Assets</button>
+            </div>
+          </div>
+      
+          <!-- 🔥 Carousel START -->
+          <div id="sachiCarousel" class="carousel slide text-center" data-bs-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/InuiSachi/InuiSachi_default.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="InuiSachi 1" width="300" height="100">
+              </div>
+              <div class="carousel-item">
+                <img src="img/InuiSachi/InuiSachi_alt.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="InuiSachi 2" width="300" height="100">
+              </div>
+              <div class="carousel-item">
+                <img src="img/InuiSachi/InuiSachi_chibi.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="InuiSachi 3" width="300" height="100">
+              </div>
+            </div>
+      
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#sachiCarousel" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#sachiCarousel" data-bs-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </button>
+          </div>
+          <!-- 🔥 Carousel END -->
+        </div>
+      </div>
+      
+      <!-- 🎬 STORY MODAL -->
+      <div class="modal fade" id="storyModal" tabindex="-1" aria-labelledby="storyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="storyModalLabel">Inui Sachi's Story</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p>Inui Sachi is a courageous and thoughtful character born from an arcane realm of imagination. With her sharp wit and calm demeanor, she explores uncharted adventures to uncover the mysteries of her origin.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 🧾 ASSETS MODAL -->
+      <div class="modal fade" id="assetModal" tabindex="-1" aria-labelledby="assetModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="assetModalLabel">Inui Sachi Assets</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <ul>
+                <li>🎨 Character Sheets</li>
+                <li>🎧 Voice Clips</li>
+                <li>🖼️ Wallpapers</li>
+                <li>📜 Concept Art</li>
+              </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</body>
+</html>
