@@ -6,114 +6,158 @@
     <title>Light Novel</title>
 
     <link rel="stylesheet" href="style.css">
- 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
 </head>
 <body>
-    <main>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-              <a class="navbar-brand" href="#">Light Novel</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div class="navbar-nav">
-                  <a class="nav-link active" aria-current="page" href="#">Home</a>
-                  <a class="nav-link" href="#">About</a>
-                </div>
-              </div>
-            </div>
-          </nav>
-    </main>
+    <svg width="100%" height="100%" style="position:absolute; top:0; left:0; pointer-events: none; z-index: -1;">
+        <path id="semiCirclePath" d="M200,400 A300,300 0 0,1 1000,400" fill="none" stroke="none"/>
+    </svg>
 
-    <div class="row" style="background-color: aqua;">
-        <div class="px-5 pt-1 my-2 border-bottom">
-          <h1 class="display-4 fw-bold text-start">Inui Sachi</h1>
-      
-          <div class="col-lg-6">
-            <p class="lead mb-4 text-start">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis doloremque explicabo hic aut sapiente mollitia dolorem. Veritatis reiciendis amet, inventore in accusantium neque ratione aut praesentium? Aliquam optio saepe reprehenderit?
-            </p>
-          </div>
-      
-          <div class="col">
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
-              <button type="button" class="btn btn-primary btn-lg px-4 me-sm-3" data-bs-toggle="modal" data-bs-target="#storyModal">Story</button>
-              <button type="button" class="btn btn-outline-secondary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#assetModal">Assets</button>
+    <!-- <main>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Light Novel</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        <a class="nav-link" href="#">About</a>
+                    </div>
+                </div>
             </div>
-          </div>
-      
-          <!-- 🔥 Carousel START -->
-          <div id="sachiCarousel" class="carousel slide text-center" data-bs-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img src="img/InuiSachi/InuiSachi_default.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="InuiSachi 1" width="300" height="100">
-              </div>
-              <div class="carousel-item">
-                <img src="img/InuiSachi/InuiSachi_alt.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="InuiSachi 2" width="300" height="100">
-              </div>
-              <div class="carousel-item">
-                <img src="img/InuiSachi/InuiSachi_chibi.png" class="img-fluid border rounded-3 shadow-lg mb-4" alt="InuiSachi 3" width="300" height="100">
-              </div>
-            </div>
-      
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#sachiCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#sachiCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon"></span>
-            </button>
-          </div>
-          <!-- 🔥 Carousel END -->
-        </div>
+        </nav>
+    </main> -->
+
+    <div class="header" style="visibility: hidden;">
+         <h1>Inui Sachi</h1>
       </div>
-      
-      <!-- 🎬 STORY MODAL -->
-      <div class="modal fade" id="storyModal" tabindex="-1" aria-labelledby="storyModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="storyModalLabel">Inui Sachi's Story</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <p>Inui Sachi is a courageous and thoughtful character born from an arcane realm of imagination. With her sharp wit and calm demeanor, she explores uncharted adventures to uncover the mysteries of her origin.</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
+      <section class="slider-section">
+        <div class="wheel">
+          <div class="wheel__card" id="InuiSachi">
+            <img src="img/InuiSachi/default.png" />
+          </div>
+          <div class="wheel__card" id="InuiSachi1">
+            <img src="img/InuiSachi/alt.png" />
+          </div>
+          <div class="wheel__card" id="InuiSachi2">
+            <img src="img/InuiSachi/chibi.png" />
+          </div>
+          <div class="wheel__card" id="InuiSachi3">
+            <img src="img/InuiSachi/default.png" />
+          </div>
+          <div class="wheel__card" id="InuiSachi">
+            <img src="img/InuiSachi/alt.png" />
+          </div>
+          <div class="wheel__card">
+            <img src="img/InuiSachi/chibi.png" />
+          </div>
+          <div class="wheel__card">
+            <img src="img/InuiSachi/default.png" />
+          </div>
+          <div class="wheel__card">
+            <img src="img/InuiSachi/alt.png" />
+          </div>
+          <div class="wheel__card">
+            <img src="img/InuiSachi/chibi.png" />
           </div>
         </div>
+      </section>
+      
       </div>
-      
-      <!-- 🧾 ASSETS MODAL -->
-      <div class="modal fade" id="assetModal" tabindex="-1" aria-labelledby="assetModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="assetModalLabel">Inui Sachi Assets</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <ul>
-                <li>🎨 Character Sheets</li>
-                <li>🎧 Voice Clips</li>
-                <li>🖼️ Wallpapers</li>
-                <li>📜 Concept Art</li>
-              </ul>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      
-      
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger, Flip, Draggable);
+
+        let wheel = document.querySelector(".wheel"),
+        images = gsap.utils.toArray(".wheel__card"),
+        cards = gsap.utils.toArray(".wheel__card"),
+        header = document.querySelector(".header"),
+        currentCard; // keep track of last clicked card so we can put it back
+
+        gsap.to(".arrow", { y: 5, ease: "power1.inOut", repeat: -1, yoyo: true });
+
+        function setup() {
+        let radius = wheel.offsetWidth / 2,
+            center = radius,
+            slice = 360 / images.length,
+            DEG2RAD = Math.PI / 180;
+        gsap.set(images, {
+            x: i => center + radius * Math.sin(i * slice * DEG2RAD),
+            y: i => center - radius * Math.cos(i * slice * DEG2RAD),
+            rotation: i => i * slice,
+            xPercent: -50,
+            yPercent: -50
+        });
+        }
+
+        setup();
+
+        window.addEventListener("resize", setup);
+
+        gsap.to(wheel, {
+        rotation: -360,
+        ease: "none",
+        duration: images.length,
+        scrollTrigger: {
+            start: 0,
+            end: () => document.documentElement.scrollHeight - window.innerHeight, // Dynamically calculate the end value
+            scrub: 1
+        }
+        });
+
+        Draggable.create(wheel, {
+            type: "rotation",
+            inertia: true,
+            onDrag: function () {
+                gsap.to(wheel, { rotation: this.rotation });
+            }
+        });
+
+        cards.forEach(card => card.addEventListener("click", onClickCard));
+
+        header.addEventListener("click", closeCurrentCard);
+
+        function closeCurrentCard() {
+        if (currentCard) {
+            let img = header.querySelector("img"),
+            state = Flip.getState(img);
+            currentCard.appendChild(img);
+            Flip.from(state, {
+            ease: "power1.inOut",
+            scale: true
+            });
+            currentCard = null;
+            header.style.visibility = "hidden"; // Hide header when no image is selected
+        }
+        }
+
+        function onClickCard(e) {
+        let card = e.target,
+            image = card.querySelector("img");
+        if (card !== currentCard) {
+            closeCurrentCard();
+            currentCard = card;
+            let state = Flip.getState(image);
+            header.appendChild(image);
+            Flip.from(state, {
+            duration: 0.6,
+            scale: true,
+            ease: "power1.inOut"
+            });
+            header.style.visibility = "visible"; // Show header when an image is selected
+        } else {
+            closeCurrentCard();
+        }
+        }
+    </script>
 </body>
 </html>
