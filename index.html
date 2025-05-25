@@ -31,36 +31,16 @@
     </main> -->
 
     <div class="header" style="visibility: hidden;">
-         <h1>Inui Sachi</h1>
+         <h1 id="name"></h1>
+         <div id="gallery"></div>
       </div>
       <section class="slider-section">
         <div class="wheel">
           <div class="wheel__card" id="InuiSachi">
-            <img src="img/InuiSachi/default.png" />
+            <img src="img/InuiSachi/icon.png" />
           </div>
-          <div class="wheel__card" id="InuiSachi1">
-            <img src="img/InuiSachi/alt.png" />
-          </div>
-          <div class="wheel__card" id="InuiSachi2">
-            <img src="img/InuiSachi/chibi.png" />
-          </div>
-          <div class="wheel__card" id="InuiSachi3">
-            <img src="img/InuiSachi/default.png" />
-          </div>
-          <div class="wheel__card" id="InuiSachi">
-            <img src="img/InuiSachi/alt.png" />
-          </div>
-          <div class="wheel__card">
-            <img src="img/InuiSachi/chibi.png" />
-          </div>
-          <div class="wheel__card">
-            <img src="img/InuiSachi/default.png" />
-          </div>
-          <div class="wheel__card">
-            <img src="img/InuiSachi/alt.png" />
-          </div>
-          <div class="wheel__card">
-            <img src="img/InuiSachi/chibi.png" />
+          <div class="wheel__card" id="ShiinaYuzuki">
+            <img src="img/ShiinaYuzuki/icon.png" />
           </div>
         </div>
       </section>
@@ -82,9 +62,7 @@
         cards = gsap.utils.toArray(".wheel__card"),
         header = document.querySelector(".header"),
         currentCard; // keep track of last clicked card so we can put it back
-
-        gsap.to(".arrow", { y: 5, ease: "power1.inOut", repeat: -1, yoyo: true });
-
+        
         function setup() {
         let radius = wheel.offsetWidth / 2,
             center = radius,
@@ -127,36 +105,71 @@
         header.addEventListener("click", closeCurrentCard);
 
         function closeCurrentCard() {
-        if (currentCard) {
-            let img = header.querySelector("img"),
-            state = Flip.getState(img);
-            currentCard.appendChild(img);
-            Flip.from(state, {
-            ease: "power1.inOut",
-            scale: true
-            });
-            currentCard = null;
-            header.style.visibility = "hidden"; // Hide header when no image is selected
-        }
+            if (currentCard) {
+                let img = header.querySelector("img"),
+                    state = Flip.getState(img);
+                currentCard.appendChild(img);
+                Flip.from(state, {
+                    ease: "power1.inOut",
+                    scale: true
+                });
+                currentCard = null;
+                header.style.visibility = "hidden"; // Hide header when no image is selected
+                header.querySelector("#name").textContent = ""; // Clear the name
+                header.querySelector("#gallery").innerHTML = ""; // Clear the gallery images
+            }
         }
 
-        function onClickCard(e) {
-        let card = e.target,
-            image = card.querySelector("img");
-        if (card !== currentCard) {
-            closeCurrentCard();
-            currentCard = card;
-            let state = Flip.getState(image);
-            header.appendChild(image);
-            Flip.from(state, {
-            duration: 0.6,
-            scale: true,
-            ease: "power1.inOut"
-            });
-            header.style.visibility = "visible"; // Show header when an image is selected
-        } else {
-            closeCurrentCard();
+        function formatName(id) {
+            // Convert the id to a properly formatted name
+            return id.replace(/([A-Z])/g, ' $1') // Add space before uppercase letters
+                     .replace(/^./, str => str.toUpperCase()); // Capitalize the first letter
         }
+
+        const characterImages = {
+    InuiSachi: [
+        "img/InuiSachi/default.png",
+        "img/InuiSachi/alt.png",
+        "img/InuiSachi/chibi.png",
+    ],
+    ShiinaYuzuki: [
+        "img/ShiinaYuzuki/default.png",
+        "img/ShiinaYuzuki/alt.png"
+    ]
+};
+
+        function onClickCard(e) {
+            let card = e.currentTarget,
+                image = card.querySelector("img");
+            if (card !== currentCard) {
+                closeCurrentCard();
+                currentCard = card;
+                let state = Flip.getState(image);
+                header.appendChild(image);
+                Flip.from(state, {
+                    duration: 0.6,
+                    scale: true,
+                    ease: "power1.inOut"
+                });
+                header.style.visibility = "visible";
+
+                // Update the <h1> content based on the card's id
+                let formattedName = formatName(card.id);
+                header.querySelector("#name").textContent = formattedName;
+
+                // Show extra images in the gallery
+                const gallery = header.querySelector("#gallery");
+                gallery.innerHTML = ""; // Clear previous
+                (characterImages[card.id] || []).forEach(src => {
+                    const img = document.createElement("img");
+                    img.src = src;
+                    img.style.width = "120px";
+                    img.style.margin = "10px";
+                    gallery.appendChild(img);
+                });
+            } else {
+                closeCurrentCard();
+            }
         }
     </script>
 </body>
