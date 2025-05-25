@@ -13,8 +13,8 @@
         <path id="semiCirclePath" d="M200,400 A300,300 0 0,1 1000,400" fill="none" stroke="none"/>
     </svg>
 
-    <!-- <main>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg">
+    <main>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg fixed-top">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">Light Novel</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </nav>
-    </main> -->
+    </main>
 
     <div class="header" style="visibility: hidden;">
          <h1 id="name"></h1>
@@ -63,10 +63,13 @@
         header = document.querySelector(".header"),
         currentCard; // keep track of last clicked card so we can put it back
         
+        let cardNo = document.querySelectorAll('.wheel__card').length;
+        let circle = 360 / cardNo;
+
         function setup() {
         let radius = wheel.offsetWidth / 2,
             center = radius,
-            slice = 360 / images.length,
+            slice = circle / images.length,
             DEG2RAD = Math.PI / 180;
         gsap.set(images, {
             x: i => center + radius * Math.sin(i * slice * DEG2RAD),
@@ -82,7 +85,7 @@
         window.addEventListener("resize", setup);
 
         gsap.to(wheel, {
-        rotation: -360,
+        rotation: -90,
         ease: "none",
         duration: images.length,
         scrollTrigger: {
@@ -104,22 +107,6 @@
 
         header.addEventListener("click", closeCurrentCard);
 
-        function closeCurrentCard() {
-            if (currentCard) {
-                let img = header.querySelector("img"),
-                    state = Flip.getState(img);
-                currentCard.appendChild(img);
-                Flip.from(state, {
-                    ease: "power1.inOut",
-                    scale: true
-                });
-                currentCard = null;
-                header.style.visibility = "hidden"; // Hide header when no image is selected
-                header.querySelector("#name").textContent = ""; // Clear the name
-                header.querySelector("#gallery").innerHTML = ""; // Clear the gallery images
-            }
-        }
-
         function formatName(id) {
             // Convert the id to a properly formatted name
             return id.replace(/([A-Z])/g, ' $1') // Add space before uppercase letters
@@ -127,38 +114,61 @@
         }
 
         const characterImages = {
-    InuiSachi: [
-        "img/InuiSachi/default.png",
-        "img/InuiSachi/alt.png",
-        "img/InuiSachi/chibi.png",
-    ],
-    ShiinaYuzuki: [
-        "img/ShiinaYuzuki/default.png",
-        "img/ShiinaYuzuki/alt.png"
-    ]
-};
+            InuiSachi: [
+                "img/InuiSachi/default.png",
+                "img/InuiSachi/alt.png",
+                "img/InuiSachi/chibi.png"
+            ],
+            ShiinaYuzuki: [
+                "img/ShiinaYuzuki/default.png",
+                "img/ShiinaYuzuki/alt.png",
+                "img/ShiinaYuzuki/chibi.png"
+            ]
+        };
+
+        function closeCurrentCard() {
+        if (currentCard) {
+            let img = header.querySelector("img"),
+            state = Flip.getState(img);
+            currentCard.appendChild(img);
+            Flip.from(state, {
+            ease: "power1.inOut",
+            scale: true
+            });
+            currentCard = null;
+            header.style.visibility = "hidden"; // Hide header when no image is selected
+            header.querySelector("#name").textContent = "";
+            header.querySelector("#gallery").innerHTML = "";
+        }
+        }
 
         function onClickCard(e) {
-            let card = e.currentTarget,
-                image = card.querySelector("img");
-            if (card !== currentCard) {
-                closeCurrentCard();
-                currentCard = card;
-                let state = Flip.getState(image);
-                header.appendChild(image);
-                Flip.from(state, {
-                    duration: 0.6,
-                    scale: true,
-                    ease: "power1.inOut"
-                });
-                header.style.visibility = "visible";
+        let card = e.target,
+            image = card.querySelector("img");
+        if (card !== currentCard) {
+            closeCurrentCard();
+            currentCard = card;
+            let state = Flip.getState(image);
+            header.appendChild(image);
+            Flip.from(state, {
+            duration: 0.6,
+            scale: true,
+            ease: "power1.inOut"
+            });
+            header.style.visibility = "visible";
 
-                // Update the <h1> content based on the card's id
-                let formattedName = formatName(card.id);
+            let formattedName = formatName(card.id);
                 header.querySelector("#name").textContent = formattedName;
 
-                // Show extra images in the gallery
-                const gallery = header.querySelector("#gallery");
+            if (card.id === "ShiinaYuzuki") {
+                header.style.backgroundColor = "#F9F1FE";
+            } else if (card.id === "InuiSachi") {
+                header.style.backgroundColor = "#1d1e22";
+            } else {
+                header.style.backgroundColor = ""; // fallback/default
+            }
+
+            const gallery = header.querySelector("#gallery");
                 gallery.innerHTML = ""; // Clear previous
                 (characterImages[card.id] || []).forEach(src => {
                     const img = document.createElement("img");
@@ -167,9 +177,9 @@
                     img.style.margin = "10px";
                     gallery.appendChild(img);
                 });
-            } else {
-                closeCurrentCard();
-            }
+        } else {
+            closeCurrentCard();
+        }
         }
     </script>
 </body>
