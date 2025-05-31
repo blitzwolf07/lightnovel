@@ -115,77 +115,143 @@
 
         const characterImages = {
             InuiSachi: [
-                "img/InuiSachi/default.png",
-                "img/InuiSachi/alt.png",
-                "img/InuiSachi/chibi.png"
+                { src: "img/InuiSachi/default.png", type: "default" },
+                { src: "img/InuiSachi/alt.png", type: "alt" },
+                { src: "img/InuiSachi/chibi.png", type: "chibi" }
             ],
             ShiinaYuzuki: [
-                "img/ShiinaYuzuki/default.png",
-                "img/ShiinaYuzuki/alt.png",
-                "img/ShiinaYuzuki/chibi.png"
+                { src: "img/ShiinaYuzuki/default.png", type: "default" },
+                { src: "img/ShiinaYuzuki/alt.png", type: "alt" },
+                { src: "img/ShiinaYuzuki/chibi.png", type: "chibi" }
             ]
         };
 
+        const characterStories = {
+            InuiSachi: {
+                title: "About Inui Sachi",
+                content: `A cheerful and energetic girl who loves gaming and technology. Despite her playful nature, she takes her responsibilities seriously and always strives to help others.
+
+                As a prominent member of the gaming club, she's known for her strategic thinking and quick reflexes. Her favorite games are RPGs and puzzle games, though she's skilled at most genres.
+
+                Behind her bright smile lies a deep understanding of both games and people, making her a natural leader and friend to many. Her room is filled with gaming memorabilia and tech gadgets, reflecting her passionate interests.
+
+                Whether she's helping newcomers learn the basics or competing in tournaments, Sachi approaches everything with enthusiasm and determination.`
+            },
+            ShiinaYuzuki: {
+                title: "About Shiina Yuzuki",
+                content: `A mysterious and elegant student with a calm demeanor that masks her intense curiosity about the world. Her graceful appearance contrasts with her unconventional interests and hobbies.
+
+                Known for her exceptional academic performance, particularly in literature and arts, Yuzuki often spends her free time in the library or school garden, finding inspiration for her writing.
+
+                Despite her reserved nature, she forms deep connections with those who share her interests. Her notebook is filled with poetry and sketches, revealing her artistic soul.
+
+                There's always more to Yuzuki than meets the eye, and those who get to know her discover a world of imagination and wonder.`
+            }
+        };
+
+        // Preload all images when the page loads
+        const preloadedImages = {};
+        function preloadImages() {
+            Object.entries(characterImages).forEach(([character, images]) => {
+                preloadedImages[character] = images.map(image => {
+                    const img = new Image();
+                    img.src = image.src;
+                    img.className = image.type;
+                    return img;
+                });
+            });
+        }
+        // Start preloading immediately
+        preloadImages();
+
         function closeCurrentCard() {
             if (currentCard) {
-                // First, clear the gallery completely
                 const gallery = header.querySelector("#gallery");
-                while (gallery.firstChild) {
-                    gallery.removeChild(gallery.firstChild);
+                gallery.innerHTML = '';
+                
+                // Remove story section
+                const storyDiv = header.querySelector(".character-story");
+                if (storyDiv) {
+                    storyDiv.remove();
                 }
                 
-                // Then handle the main icon image
                 let img = header.querySelector("img:not([id='gallery'] *)"),
                     state = Flip.getState(img);
                 currentCard.appendChild(img);
                 Flip.from(state, {
                     ease: "power1.inOut",
-                    scale: true
+                    scale: true,
+                    duration: 0.4
                 });
                 
                 currentCard = null;
                 header.style.visibility = "hidden";
+                header.style.pointerEvents = "none";
                 header.querySelector("#name").textContent = "";
+                // Reset theme
+                header.dataset.theme = "";
             }
         }
 
         function onClickCard(e) {
-            let card = e.target,
-                image = card.querySelector("img");
+            let card = e.target.closest('.wheel__card');
+            if (!card) return;
+            
+            let image = card.querySelector("img");
+            if (!image) return;
+
             if (card !== currentCard) {
                 closeCurrentCard();
                 currentCard = card;
-                let state = Flip.getState(image);
-                // Insert the image after the name
+                
                 const nameEl = header.querySelector("#name");
+                const state = Flip.getState(image);
+                
+                nameEl.textContent = formatName(card.id);
                 nameEl.insertAdjacentElement('afterend', image);
+                
                 Flip.from(state, {
-                    duration: 0.6,
+                    duration: 0.4,
                     scale: true,
                     ease: "power1.inOut"
                 });
+                
                 header.style.visibility = "visible";
+                header.style.pointerEvents = "auto";
+                
+                // Set theme based on character
+                const isLight = card.id === "ShiinaYuzuki";
+                header.dataset.theme = isLight ? "light" : "dark";
+                header.style.backgroundColor = isLight ? "#F9F1FE" : "#1d1e22";
 
-                let formattedName = formatName(card.id);
-                nameEl.textContent = formattedName;
-
-                if (card.id === "ShiinaYuzuki") {
-                    header.style.backgroundColor = "#F9F1FE";
-                } else if (card.id === "InuiSachi") {
-                    header.style.backgroundColor = "#1d1e22";
-                } else {
-                    header.style.backgroundColor = ""; // fallback/default
+                // Update gallery
+                const gallery = header.querySelector("#gallery");
+                gallery.innerHTML = "";
+                
+                const preloadedImagesForCharacter = preloadedImages[card.id] || [];
+                if (preloadedImagesForCharacter.length) {
+                    const fragment = document.createDocumentFragment();
+                    preloadedImagesForCharacter.forEach(img => {
+                        const clonedImg = img.cloneNode();
+                        clonedImg.className = img.className;
+                        fragment.appendChild(clonedImg);
+                    });
+                    gallery.appendChild(fragment);
                 }
 
-                const gallery = header.querySelector("#gallery");
-                gallery.innerHTML = ""; // Clear previous
-                (characterImages[card.id] || []).forEach(src => {
-                    const img = document.createElement("img");
-                    img.src = src;
-                    img.style.width = "auto";
-                    img.style.height = "28vh";
-                    gallery.appendChild(img);
-                });
+                // Update character story
+                let storyDiv = header.querySelector(".character-story");
+                if (!storyDiv) {
+                    storyDiv = document.createElement("div");
+                    storyDiv.className = "character-story";
+                    header.appendChild(storyDiv);
+                }
+
+                const story = characterStories[card.id];
+                storyDiv.innerHTML = `
+                    <h2>${story.title}</h2>
+                    <p>${story.content.split('\n\n').join('</p><p>')}</p>
+                `;
             } else {
                 closeCurrentCard();
             }
