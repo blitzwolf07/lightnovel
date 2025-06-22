@@ -7,23 +7,41 @@
 
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <!-- Animated background elements -->
+    <div class="floating-elements">
+        <div class="floating-element" style="--delay: 0s; --duration: 20s; --x: 10%; --y: 20%;"></div>
+        <div class="floating-element" style="--delay: 5s; --duration: 25s; --x: 80%; --y: 60%;"></div>
+        <div class="floating-element" style="--delay: 10s; --duration: 30s; --x: 50%; --y: 80%;"></div>
+        <div class="floating-element" style="--delay: 15s; --duration: 22s; --x: 20%; --y: 40%;"></div>
+    </div>
+
     <svg width="100%" height="100%" style="position:absolute; top:0; left:0; pointer-events: none; z-index: -1;">
         <path id="semiCirclePath" d="M200,400 A300,300 0 0,1 1000,400" fill="none" stroke="none"/>
     </svg>
 
     <main>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-lg fixed-top">
+        <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">Light Novel</a>
+                <a class="navbar-brand" href="#">
+                    <i class="fas fa-star me-2"></i>Light Novel
+                </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        <a class="nav-link" href="#">About</a>
+                    <div class="navbar-nav ms-auto">
+                        <a class="nav-link active" aria-current="page" href="#">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-info-circle me-1"></i>About
+                        </a>
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-heart me-1"></i>Characters
+                        </a>
                     </div>
                 </div>
             </div>
@@ -34,18 +52,27 @@
          <h1 id="name"></h1>
          <div id="gallery"></div>
     </div>
+    
     <section class="slider-section">
         <div class="wheel">
           <div class="wheel__card" id="InuiSachi">
-            <img src="img/InuiSachi/icon.png" />
+            <div class="card-glow"></div>
+            <img src="img/InuiSachi/icon.png" alt="Inui Sachi" />
+            <div class="card-overlay">
+                <span class="character-name">Inui Sachi</span>
+            </div>
           </div>
           <div class="wheel__card" id="ShiinaYuzuki">
-            <img src="img/ShiinaYuzuki/icon.png" />
+            <div class="card-glow"></div>
+            <img src="img/ShiinaYuzuki/icon.png" alt="Shiina Yuzuki" />
+            <div class="card-overlay">
+                <span class="character-name">Shiina Yuzuki</span>
+            </div>
           </div>
         </div>
-      </section>
+    </section>
       
-      </div>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Flip.min.js"></script>
@@ -129,7 +156,7 @@
         const characterStories = {
             InuiSachi: {
                 title: "About Inui Sachi",
-                content: `Ren’s non-blood-related sister, she is a very lively and carefree girl who is really into gaming and anime which she can be a little bit hardcore about it, 
+                content: `Ren's non-blood-related sister, she is a very lively and carefree girl who is really into gaming and anime which she can be a little bit hardcore about it, 
                 
                 but despite her playful nature she takes her responsibilities seriously and has a big sense of justice. Aside from her hobbies she likes hanging around with his beloved brother, 
                 
