@@ -362,12 +362,13 @@ img {
 }
 
 #gallery img.default {
-  height: 65vh;
+  height: 100vh;
   width: auto;
   max-width: 25vw;
-  right: 5%;
-  bottom: 60%;
+  right: 8%;
+  bottom: 40%;
   z-index: 2;
+  max-height: 750px;
   /* box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); */
 }
 
@@ -545,8 +546,8 @@ img {
 
 .floating-element {
   position: absolute;
-  width: 4px;
-  height: 4px;
+  width: 5px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   animation: float-around var(--duration) linear infinite;
